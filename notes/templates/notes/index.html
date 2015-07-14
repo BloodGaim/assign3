@@ -5,7 +5,7 @@
 {% if notes %}
     {% for note in notes %}
         <a href={%url 'detail' note.id %}>
-            <div class="postit" style="background:{{note.color}};color:{{note.fontcolor}}">
+            <div class="cuecard" style="background:{{note.color}};color:{{note.fontcolor}}">
             <div id="base" style="border-color:{{note.presentation.color}} transparent transparent transparent;">
             <div class="rotatevertical">
             {{note.presentation.title}}

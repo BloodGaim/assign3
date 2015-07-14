@@ -1,15 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 * { box-sizing:border-box; }
-body { background:url(http://www.cool-backgrounds.org/wallpapers/twe_background-1280x720.jpg) #cacaca; margin:30px; }
+body { background:url(http://www.fatlossfactorreviewr.com/wp-content/uploads/2014/10/Cool-Background-Wallpaper-Dekstop.jpg) #cacaca; margin:30px; }
 
-.postit  { 
+.cuecard  { 
 	display: block;
 	padding:25px 25px 40px;
 	margin:0 auto 20px auto;
-	width:250px;
+	width:500px;
 	height:auto; 
-	min-height:250px;
-	font:20px 'Gloria Hallelujah', cursive; 
+	min-height:300px;
+	font:20px 'Shadows Into Light', cursive; 
 	line-height:1.5;
 	border:0;
 	border-radius:3px;
