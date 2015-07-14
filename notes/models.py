@@ -4,6 +4,7 @@ from django.db import models
 class Note(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True) #not a required field
+    expected_time_needed_for_slide = models.CharField(max_length = 50, default = "0 Minutes")
     color = models.CharField(max_length=50, default="yellow")
     fontcolor = models.CharField(max_length=50, default="black")
     #folder is optional
