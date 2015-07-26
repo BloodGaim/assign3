@@ -1,0 +1,23 @@
+{%load staticfiles%}
+
+<link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />
+    <h2>Presentation Cue Card App by Fang Yu</h2>
+    {% if object_list  %}
+        {% for note in object_list  %}
+            <a href={%url 'detail' note.id %}>
+            	<div class="cuecard" style="background:{{note.color}};color:{{note.fontcolor}}">
+            	  <div id="base" style="border-color:{{note.presentation.color}} transparent transparent transparent;">
+<div class="rotatevertical">{{note.presentation.title}}</div>
+  </div>
+            <br>
+            <u>{{note.title}}</u>
+            <br>
+            {{note.content}}
+            <p>Expected Time Needed: {{note.expected_time_needed_for_slide}}</p>
+            <p>Time of Presentation: {{note.presentation.time}}</p>
+      </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>No notes are available.</p>
+    {% endif %}

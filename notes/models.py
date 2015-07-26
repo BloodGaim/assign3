@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Note(models.Model):
@@ -15,6 +16,8 @@ class Note(models.Model):
     def __str__(self):
         return self.title
     
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"pk":self.pk})
         
 
 class Presentation(models.Model):
@@ -30,6 +33,9 @@ class Presentation(models.Model):
     def __str__(self):
         return self.title
         
+    def get_absolute_url(self):
+        return reverse("notes_list")
+        
 class Tag(models.Model):
     title = models.CharField(max_length=255)
     color = models.CharField(max_length=50, default="red")
@@ -37,3 +43,6 @@ class Tag(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("notes_list")
