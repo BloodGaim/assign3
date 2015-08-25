@@ -1,4 +1,14 @@
+
+{%extends 'notes/base.html'%}
 {%load staticfiles%}
+<head>
+  <title>
+    {%block title%}
+         Welcome :)
+    {%endblock%}
+  </title>
+</head>
+{%block content%}
 
 <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />
     <h2>Presentation Cue Card App by Fang Yu</h2>
@@ -21,3 +31,5 @@
     {% else %}
         <p>No notes are available.</p>
     {% endif %}
+    
+{%endblock%}

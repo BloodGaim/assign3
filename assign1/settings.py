@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'notes',
     'bootstrap3',
     'crispy_forms',
+    'accounts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,3 +88,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+LOGIN_URL = '/accounts/login' #URL to forward to when the page needs user to login
+LOGIN_REDIRECT_URL = '/list/' #Page to forward user after user login
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media","profile_images")
+MEDIA_URL = '/media/profile_images/'

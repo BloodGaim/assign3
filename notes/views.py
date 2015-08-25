@@ -11,8 +11,12 @@ from notes.forms import PresentationForm
 from .models import Tag
 from notes.forms import TagForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView , TemplateView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from accounts.models import UserProfile
+
 
 
 
@@ -70,26 +74,73 @@ class NoteList(ListView):
     
     def get_queryset(self):
         presentation = self.kwargs['presentation']
+        
         if presentation == '':
             return Note.objects.all()
         else:
             return Note.objects.filter(presentation__title__iexact=presentation)
             
+    def get_context_data(self, **kwargs):
+        context = super(NoteList, self).get_context_data(**kwargs)
+        
+        #provided so that the avatar can be displayed in base.html
+        context['curruser'] = UserProfile.objects.get(user=self.request.user)
+        return context
+        
+            
 class NoteCreate(CreateView):
     model = Note
     form_class = NoteForm
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(NoteCreate, self).dispatch(*args, **kwargs)
+        
+    def get_context_data(self, **kwargs):
+        context = super(NoteCreate, self).get_context_data(**kwargs)
+        context['curruser'] = UserProfile.objects.get(user=self.request.user)
+        return context
 
 class PresentationCreate(CreateView):
     model = Presentation
     form_class = PresentationForm
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PresentationCreate, self).dispatch(*args, **kwargs)
+        
+    def get_context_data(self, **kwargs):
+        context = super(PresentationCreate, self).get_context_data(**kwargs)
+        context['curruser'] = UserProfile.objects.get(user=self.request.user)
+        return context
 
 class TagCreate(CreateView):
     model = Tag
     form_class = TagForm
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(TagCreate, self).dispatch(*args, **kwargs)
+        
+    def get_context_data(self, **kwargs):
+        context = super(TagCreate, self).get_context_data(**kwargs)
+        context['curruser'] = UserProfile.objects.get(user=self.request.user)
+        return context
 
 class NoteUpdate(UpdateView):
     model = Note
     form_class = NoteForm
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(NoteUpdate, self).dispatch(*args, **kwargs)
+        
+    def get_context_data(self, **kwargs):
+        context = super(NoteUpdate, self).get_context_data(**kwargs)
+        context['curruser'] = UserProfile.objects.get(user=self.request.user)
+        return context
+    
+
 
 class NoteDetail(DetailView):
     model = Note
@@ -97,3 +148,15 @@ class NoteDetail(DetailView):
 class NoteDelete(DeleteView):
     model = Note
     success_url = reverse_lazy('notes_list')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(NoteDelete, self).dispatch(*args, **kwargs)
+        
+    def get_context_data(self, **kwargs):
+        context = super(NoteDelete, self).get_context_data(**kwargs)
+        context['curruser'] = UserProfile.objects.get(user=self.request.user)
+        return context
+
+class Landing(TemplateView):
+    template_name = "notes/landing.html"
